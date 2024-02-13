@@ -83,6 +83,9 @@ spec:
           {{- if .Values.persistence.enabled }}
           persistentVolumeClaim:
             claimName: {{ include "n8n.fullname" . }}
+          {{- else if .Values.persistence.existing }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.existing.name }}
           {{- else }}
           emptyDir: {}
           {{- end }}
